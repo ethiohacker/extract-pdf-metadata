@@ -3,8 +3,6 @@
 import argparse
 from PyPDF4 import PdfFileReader
 
-sample_pdf = 'sample.pdf'
-
 def print_meta(filename):
     with open(filename, 'rb') as pdf:
         pdf_file = PdfFileReader(pdf)
@@ -13,5 +11,12 @@ def print_meta(filename):
         for meta_item in pdf_info:
             print(f'[+] {meta_item}: {pdf_info[meta_item]}')
 
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        usage='python3 pdf_read.py PDF_FILENAME'
+    )
+    parser.add_argument('pdf_file_name', type=str, metavar='PDF_FILENAME',
+    help='specify the name of the pdf file')
 
-print_meta(sample_pdf)
+    args = parser.parse_args()
+    print_meta(args.pdf_file_name)
